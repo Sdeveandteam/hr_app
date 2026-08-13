@@ -18,7 +18,10 @@ COPY . .
 
 RUN composer update --no-dev --optimize-autoloader
 
-RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
+# Buat file database sqlite kosong agar tidak error
+RUN mkdir -p /var/www/html/database && touch /var/www/html/database/database.sqlite
+
+RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database
 
 EXPOSE 8080
 
