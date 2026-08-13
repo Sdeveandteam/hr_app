@@ -18,9 +18,10 @@ COPY . .
 
 RUN composer update --no-dev --optimize-autoloader
 
-RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
-RUN sed -i 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf
+# Salin konfigurasi Apache yang baru
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
+# Izin folder storage dan cache
 RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
 
 EXPOSE 80
