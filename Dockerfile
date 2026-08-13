@@ -4,7 +4,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
 WORKDIR /var/www/html
 COPY . .
-RUN composer install --no-dev --optimize-autoloader
+RUN composer update --no-dev --optimize-autoloader
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -s 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -s 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
