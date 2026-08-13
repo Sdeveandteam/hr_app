@@ -18,11 +18,9 @@ COPY . .
 
 RUN composer update --no-dev --optimize-autoloader
 
-# Buat folder dan file database sqlite
 RUN mkdir -p /var/www/html/database && touch /var/www/html/database/database.sqlite
 RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database
 
 EXPOSE 8080
 
-# Jalankan migrasi database lalu jalankan server PHP
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8080
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
