@@ -23,4 +23,5 @@ RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/ht
 
 EXPOSE 8080
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
+# Gunakan script sh untuk jalankan migrasi dulu, baru jalankan server
+CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8080
